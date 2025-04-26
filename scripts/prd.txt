@@ -1,0 +1,116 @@
+# Product Requirements Document (PRD): Construction Task Manager
+
+## Product Name
+Construction Task Manager
+
+## Overview
+The Construction Task Manager is a cross-platform solution (web and mobile) designed to revolutionize real-time communication and project coordination in the construction industry. By integrating Africa's Talking SMS and USSD APIs, it eliminates the inefficiency of daily in-person meetings for task assignment. The tool empowers project managers, engineers, and artisans to collaborate seamlessly, with digital task assignments and instant notifications. This directly addresses the hackathon theme of Construction Solutions by targeting the core pain points in construction task management and communication.
+
+## Problem Statement
+In the construction sector, daily meetings for task assignment are a major bottleneck, leading to wasted time and reduced productivity. The current process involves:
+- **Project Managers:** Define main tasks.
+- **Engineers:** Break down main tasks into actionable sub-tasks.
+- **Artisans:** Execute sub-tasks but often lack immediate access to assignments.
+This manual, meeting-driven workflow delays project timelines and hinders effective team coordination.
+
+## Target Users
+- **Project Managers:** Assign main tasks to engineers.
+- **Engineers:** Create sub-tasks and assign them to artisans.
+- **Artisans:** Execute sub-tasks, accessing assignments via feature phones (USSD/SMS).
+
+## Solution Description
+The Construction Task Manager streamlines task management with a two-part system:
+
+### 1. Admin Dashboard (React Web Application)
+- Built with React and ShadCN UI for a modern, responsive interface.
+- Used by project managers and engineers to manage tasks, assignments, and users.
+- Features role-based access, interactive UI, and real-time updates.
+
+### 2. USSD & SMS Interface (Mobile)
+- Designed for artisans using feature phones.
+- Artisans dial a USSD code (e.g., *123#) and receive their daily tasks via SMS.
+- No smartphone or internet required for artisans.
+
+This solution digitizes task assignment, reduces meeting times, and ensures instant, reliable task visibility for all roles.
+
+## Key Features
+
+### Admin Dashboard (React)
+- **User Authentication:** Secure JWT-based login for project managers and engineers.
+- **Role-Based UI:**
+  - Project Managers: Create/assign main tasks to engineers, view all tasks.
+  - Engineers: View assigned main tasks, create/assign sub-tasks to artisans.
+- **Modern UI:** Built with React, React Router, and ShadCN UI components (tables, forms, etc.).
+- **Task Management:** Create, assign, update, and track tasks and sub-tasks.
+
+### USSD & SMS for Artisans
+- **USSD Access:** Dial *123# from a registered phone.
+- **ID Input:** Enter unique artisan ID (e.g., "12345").
+- **Validation:** Match ID and phone number in the database.
+- **SMS Delivery:** Receive SMS listing sub-tasks due today (e.g., "Tasks: 1. Dig trenches 2. Pour concrete").
+- **Fallback:** "No tasks for today" if none assigned.
+- **Error Handling:** Clear error messages for invalid IDs or unregistered numbers.
+
+### Notifications
+- **Real-Time SMS:** Instant SMS notifications for new or updated tasks.
+- **Daily Reminders:** Scheduled SMS reminders for pending tasks (optional enhancement).
+
+## Technical Requirements
+- **Backend:** Node.js with Express for REST APIs and serving the frontend.
+- **Database:** MongoDB for users, artisans, tasks, and relationships.
+- **Frontend:** React with React Router and ShadCN UI for the dashboard.
+- **Authentication:** JWT-based for dashboard access.
+- **APIs:**
+  - Africa's Talking USSD API for session management.
+  - Africa's Talking SMS API for task notifications.
+- **Deployment:** Local server with ngrok for hackathon demo; cloud-ready architecture for future scaling.
+
+## Database Schema
+- **Users:** username, password (hashed), role ("project_manager" or "engineer").
+- **Artisans:** id, name, phone.
+- **MainTasks:** title, description, assigned_to (engineer ID), status.
+- **SubTasks:** title, description, main_task (MainTask ID), assigned_to (artisan ID), due_date, status.
+
+## User Flow
+- **Project Manager:**
+  - Logs into the dashboard.
+  - Creates a main task and assigns it to an engineer.
+- **Engineer:**
+  - Logs into the dashboard.
+  - Views assigned main tasks, creates sub-tasks, assigns them to artisans.
+- **Artisan:**
+  - Dials *123#, enters ID, receives SMS with daily tasks.
+
+## Success Metrics
+- **Time Savings:** Reduced or eliminated daily meeting duration.
+- **Task Accessibility:** Instant, reliable task delivery to artisans.
+- **User Adoption:** Positive usability feedback from all roles.
+- **System Reliability:** High SMS/USSD delivery success rate.
+
+## Assumptions
+- Tasks are assigned daily; artisans check via USSD each morning.
+- Artisans have registered IDs and phone numbers.
+- Dashboard requires internet; artisans use SMS/USSD only.
+
+## Future Enhancements
+- Task completion via USSD/SMS (two-way communication).
+- Real-time task update notifications.
+- Material tracking and payment features.
+- Analytics dashboard for project progress and bottlenecks.
+
+## Implementation Plan
+1. **Setup:** Initialize Node.js, Express, MongoDB, and Africa's Talking sandbox.
+2. **Database:** Define schemas and seed initial data.
+3. **Backend APIs:** Build RESTful APIs for authentication, user, and task management.
+4. **Frontend:** Develop React app with ShadCN UI for login and dashboard.
+5. **USSD Logic:** Create /ussd endpoint for artisan requests and SMS triggers.
+6. **Integration:** Connect frontend, backend, and Africa's Talking APIs.
+7. **Testing:** Use ngrok and Africa's Talking simulator for end-to-end testing.
+
+## Demo Plan
+- Show project manager creating a task in the React dashboard.
+- Show engineer assigning sub-tasks to artisans.
+- Simulate artisan receiving tasks via USSD and SMS.
+
+---
+This PRD provides a clear, actionable blueprint for building the Construction Task Manager, ensuring all stakeholders understand the vision, requirements, and implementation path. 
