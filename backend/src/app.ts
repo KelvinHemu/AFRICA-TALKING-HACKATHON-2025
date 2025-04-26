@@ -3,6 +3,10 @@ import mongoose from "mongoose";
 import * as dotenv from "dotenv";
 import authRoutes from "./routes/auth";
 import artisanRoutes from "./routes/artisan";
+import mainTaskRoutes from "./routes/maintask";
+import subTaskRoutes from "./routes/subtask";
+import smsRoutes from "./routes/sms";
+import ussdRoutes from "./routes/ussd";
 
 dotenv.config();
 
@@ -17,5 +21,9 @@ mongoose.connect(process.env.MONGODB_URI || "", {})
 // TODO: Add your routes here
 app.use("/api/auth", authRoutes);
 app.use("/api/artisans", artisanRoutes);
+app.use("/api/tasks", mainTaskRoutes);
+app.use("/api/subtasks", subTaskRoutes);
+app.use("/api/sms", smsRoutes);
+app.use("/api/ussd", ussdRoutes);
 
 export default app;
