@@ -1,4 +1,5 @@
 import mongoose, { Schema, Document, Model } from "mongoose";
+import bcrypt from "bcrypt";
 
 export interface IUser extends Document {
   username: string;
@@ -17,6 +18,16 @@ const UserSchema: Schema<IUser> = new Schema({
   created_at: { type: Date, default: Date.now },
   last_login: { type: Date },
 });
+
+UserSchema.pre<IUser>("save", async function (next) {
+  if (!this.isModified("password")) return next();
+  this.password = await bcrypt.hash(this.password, 10);
+  next();
+});
+
+UserSchema.methods.comparePassword = function (candidate: string) {
+  return bcrypt.compare(candidate, this.password);
+};
 
 // TODO: Add password hashing middleware here
 
