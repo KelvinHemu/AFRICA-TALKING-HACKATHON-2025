@@ -26,3 +26,10 @@ node_modules/
 tasks.json
 tasks/ 
 mcp.json
+
+package-lock.json
+package.json
+tsconfig.json
+index.ts
+app.ts
+
