@@ -32,4 +32,4 @@ UserSchema.methods.comparePassword = function (candidate: string) {
 // TODO: Add password hashing middleware here
 
 const User: Model<IUser> = mongoose.model<IUser>("User", UserSchema);
-export default User; 
+export default User;
