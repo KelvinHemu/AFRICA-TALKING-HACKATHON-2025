@@ -48,4 +48,5 @@ router.get("/me", authMiddleware, (req: any, res) => {
   res.json({ user: req.user });
 });
 
+export { authMiddleware };
 export default router;

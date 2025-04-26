@@ -1,4 +1,0 @@
-# Keep this directory tracked by git even if empty
-# Add files for SMS controllers here
-*
-!.gitignore 

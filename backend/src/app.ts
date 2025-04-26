@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import * as dotenv from "dotenv";
 import authRoutes from "./routes/auth";
+import artisanRoutes from "./routes/artisan";
 
 dotenv.config();
 
@@ -15,5 +16,6 @@ mongoose.connect(process.env.MONGODB_URI || "", {})
 
 // TODO: Add your routes here
 app.use("/api/auth", authRoutes);
+app.use("/api/artisans", artisanRoutes);
 
 export default app;
