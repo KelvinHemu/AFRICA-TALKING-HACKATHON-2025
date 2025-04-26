@@ -15,4 +15,4 @@ const ArtisanSchema: Schema<IArtisan> = new Schema({
 });
 
 const Artisan: Model<IArtisan> = mongoose.model<IArtisan>("Artisan", ArtisanSchema);
-export default Artisan; 
+export default Artisan;

@@ -31,4 +31,4 @@ SubTaskSchema.pre("save", function (next) {
 });
 
 const SubTask: Model<ISubTask> = mongoose.model<ISubTask>("SubTask", SubTaskSchema);
-export default SubTask; 
+export default SubTask;
